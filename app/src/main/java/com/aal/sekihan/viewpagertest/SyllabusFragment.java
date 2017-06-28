@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -40,10 +41,11 @@ public class SyllabusFragment extends Fragment {
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.fragment_main_linearlayout);
         linearLayout.setBackgroundResource(getArguments().getInt(BACKGROUND_COLOR));
 
+
         final ArrayList<String> data = new ArrayList<>();
         data.add("情報数学");
         data.add("言語解析論");
-        data.add("神保");
+        data.add("コンソメ");
         data.add("胡椒");
         data.add("胡椒");
         data.add("胡椒");
@@ -53,6 +55,7 @@ public class SyllabusFragment extends Fragment {
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data);
         ListView list = (ListView) view.findViewById(R.id.syllabusList);
 
+        list.setAdapter(adapter);
         return view;
     }
 }
