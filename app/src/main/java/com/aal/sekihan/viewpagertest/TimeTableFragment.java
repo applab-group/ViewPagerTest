@@ -3,6 +3,7 @@ package com.aal.sekihan.viewpagertest;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,8 +57,11 @@ public class TimeTableFragment extends Fragment {
 
     class SampleClickListener implements View.OnClickListener
     {
-        public void onClick(View v){
-            tv.setText("登録しました");
+        public void onClick(View v) {
+            //tv.setText("登録しました");
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("時間割入力")
+                    .setPositiveButton("OK", null).show();
         }
     }
 }
