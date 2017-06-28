@@ -12,11 +12,11 @@ import android.widget.LinearLayout;
  * Created by sekihan on 2017/06/27.
  */
 
-public class ExampleFragment extends Fragment {
-    private final static String BACKGROUND_COLOR = "backgroung_color";
+public class SyllabusFragment extends Fragment {
+    private final static String BACKGROUND_COLOR = "background_color";
 
-    public static ExampleFragment newInstance(@ColorRes int IdRes){
-        ExampleFragment frag = new ExampleFragment();
+    public static SyllabusFragment newInstance(@ColorRes int IdRes){
+        SyllabusFragment frag = new SyllabusFragment();
         Bundle b = new Bundle();
         b.putInt(BACKGROUND_COLOR, IdRes);
         frag.setArguments(b);
@@ -30,7 +30,7 @@ public class ExampleFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.fragment_main, null);
+        View view = inflater.inflate(R.layout.fragment_syllabus, null);
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.fragment_main_linearlayout);
         linearLayout.setBackgroundResource(getArguments().getInt(BACKGROUND_COLOR));
 

@@ -17,11 +17,11 @@ public  class ExampleFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return ExampleFragment.newInstance(android.R.color.white);
+                return TimeTableFragment.newInstance(android.R.color.white);
             case 1:
-                return ExampleFragment.newInstance(android.R.color.white);
+                return SyllabusFragment.newInstance(android.R.color.white);
             case 2:
-                return ExampleFragment.newInstance(android.R.color.white);
+                return UnitFragment.newInstance(android.R.color.white);
         }
         return null;
 
