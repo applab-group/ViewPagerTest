@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -59,9 +60,23 @@ public class TimeTableFragment extends Fragment {
     {
         public void onClick(View v) {
             //tv.setText("登録しました");
-            new AlertDialog.Builder(getActivity())
+            /*new AlertDialog.Builder(getActivity())
                     .setTitle("時間割入力")
-                    .setPositiveButton("OK", null).show();
+                    .setPositiveButton("OK", null).show();*/
+            final EditText editView = new EditText(getActivity());
+
+            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+
+            dialog.setTitle("時間割入力");
+            dialog.setView(editView);
+
+            //OKボタン
+            dialog.setPositiveButton("OK", null);
+
+            //キャンセルボタン
+            dialog.setNegativeButton("キャンセル", null);
+
+            dialog.show();
         }
     }
 }
