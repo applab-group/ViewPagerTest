@@ -30,5 +30,6 @@ dependencies {
 
     def supportLibraryVersion = '24.1.1'
     compile "com.android.support:design:$supportLibraryVersion"
+    compile fileTree(include: ['*.jar'], dir: 'libs')
 }
 

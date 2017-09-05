@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:defaultValue="8"
+        android:key="timetable_limit"
+        android:summary="時間割の上限（通常は８）を指定します。"
+        android:title="時間割の上限"/>
+</PreferenceScreen>

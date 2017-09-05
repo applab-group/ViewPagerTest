@@ -9,8 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +26,7 @@ import java.util.ArrayList;
 public class SyllabusFragment extends Fragment {
     private final static String BACKGROUND_COLOR = "background_color";
     ArrayAdapter<String> adapter;
+    AsyncNetworkTask task;
 
     public static SyllabusFragment newInstance(@ColorRes int IdRes){
         SyllabusFragment frag = new SyllabusFragment();
@@ -41,6 +48,12 @@ public class SyllabusFragment extends Fragment {
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.fragment_main_linearlayout);
         linearLayout.setBackgroundResource(getArguments().getInt(BACKGROUND_COLOR));
 
+        ProgressBar progress = (ProgressBar)view.findViewById(R.id.progress);
+        progress.setVisibility(ProgressBar.VISIBLE);
+
+        task = new AsyncNetworkTask(view);
+        task.execute("https://gs.okayama-u.ac.jp/campusweb/campussquare.do");
+
 
         final ArrayList<String> data = new ArrayList<>();
         data.add("情報数学");
@@ -51,11 +64,13 @@ public class SyllabusFragment extends Fragment {
         data.add("胡椒");
         data.add("胡椒");
         data.add("胡椒");
+        
 
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data);
         ListView list = (ListView) view.findViewById(R.id.syllabusList);
-
         list.setAdapter(adapter);
         return view;
     }
+
+    private void exec_post() {}
 }

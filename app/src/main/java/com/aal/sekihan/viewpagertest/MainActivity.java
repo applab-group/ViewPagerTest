@@ -1,5 +1,7 @@
 package com.aal.sekihan.viewpagertest;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.annotation.ColorRes;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -46,9 +48,8 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer);
         NavigationView navigationView = (NavigationView) findViewById(R.id.main_drawer_navigation);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
-        drawerLayout.setDrawerListener(toggle);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
+        drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(select);
@@ -57,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView.OnNavigationItemSelectedListener select = new NavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(MenuItem item) {
+
+            int id = item.getItemId();
+            switch (id){
+                case R.id.menu_setting:
+                    Intent i = new Intent(MainActivity.this, ConfigActivity.class);
+                    startActivity(i);
+                    break;
+            }
             drawerLayout.closeDrawers();
             return true;
         }

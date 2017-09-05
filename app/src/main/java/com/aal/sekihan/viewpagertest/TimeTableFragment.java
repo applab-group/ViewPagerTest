@@ -47,6 +47,11 @@ public class TimeTableFragment extends Fragment {
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.fragment_main_linearlayout);
         linearLayout.setBackgroundResource(getArguments().getInt(BACKGROUND_COLOR));
 
+        tv = new TextView(getActivity());
+        tv.setText("登録されている時間割");
+        bt = new Button(getActivity());
+        bt.setText("時間割追加");
+
         linearLayout.addView(tv);
         linearLayout.addView(bt);
 
