@@ -3,6 +3,8 @@ package com.aal.sekihan.viewpagertest;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by sekihan on 2017/06/27.
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class SyllabusFragment extends Fragment {
     private final static String BACKGROUND_COLOR = "background_color";
     ArrayAdapter<String> adapter;
-    AsyncNetworkTask task;
+    private SyllabusUtil util;
 
     public static SyllabusFragment newInstance(@ColorRes int IdRes){
         SyllabusFragment frag = new SyllabusFragment();
@@ -48,29 +48,42 @@ public class SyllabusFragment extends Fragment {
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.fragment_main_linearlayout);
         linearLayout.setBackgroundResource(getArguments().getInt(BACKGROUND_COLOR));
 
-        ProgressBar progress = (ProgressBar)view.findViewById(R.id.progress);
-        progress.setVisibility(ProgressBar.VISIBLE);
+        view.findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch(util.getState()){
+                    case BUSY:
+                        Toast.makeText(getActivity(),"情報を取得しています。暫くお待ち下さい。",Toast.LENGTH_SHORT).show();
+                        break;
+                    case SEARCH_READY:
+                        util.printParams();
+                        util.setSearchParam("jikanwariShozokuCode", "0933");
+                        util.search();
+                        Toast.makeText(getActivity(), "検索しました", Toast.LENGTH_SHORT).show();
+                        break;
+                    case SEARCH_FINISHED:
 
-        task = new AsyncNetworkTask(view);
-        task.execute("https://gs.okayama-u.ac.jp/campusweb/campussquare.do");
+                        RecyclerView rv = (RecyclerView)getActivity().findViewById(R.id.rv);
 
+                        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+                        manager.setOrientation(LinearLayoutManager.VERTICAL);
+                        rv.setLayoutManager(manager);
 
-        final ArrayList<String> data = new ArrayList<>();
-        data.add("情報数学");
-        data.add("言語解析論");
-        data.add("コンソメ");
-        data.add("胡椒");
-        data.add("胡椒");
-        data.add("胡椒");
-        data.add("胡椒");
-        data.add("胡椒");
-        
+                        RecyclerView.Adapter adapter = new SyllabusAdapter(util.getTable());
+                        rv.setAdapter(adapter);
 
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data);
-        ListView list = (ListView) view.findViewById(R.id.syllabusList);
-        list.setAdapter(adapter);
+                        Toast.makeText(getActivity(), "適用しました", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
+
+        util = new SyllabusUtil(view);
+        util.initialize();
+
         return view;
     }
 
-    private void exec_post() {}
+
+
 }

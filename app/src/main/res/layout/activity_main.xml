@@ -38,6 +38,7 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
+
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
@@ -48,5 +49,7 @@
         android:background="@android:color/white"
         app:headerLayout="@layout/layout_drawer_header"
         app:menu="@menu/menu_drawer"/>
+
+
 
 </android.support.v4.widget.DrawerLayout>
